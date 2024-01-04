@@ -1,0 +1,36 @@
+<!-- ArUco marker detection for SLAM -->
+<launch>
+ 
+    <arg name="camera_name"  default="camera" />
+
+    <node pkg="aruco_detect" exec="aruco_detector" output="screen">
+      <remap from="/camera/image" to="/$(var camera_name)/color/image_raw" />
+      <remap from="/camera_info" to="/$(var camera_name)/color/camera_info" />
+      
+      <param name="verbose"  value="false"/>
+
+      <param name="camera_frame" value="$(var camera_name)" />
+      <param name="camera_calibration_file" value="$(find-pkg-share aruco_detect)/launch/calibration_110422250453.yml" />
+      
+      <!-- default marker size -->
+      <param name="marker_size" value="0.2" />
+      <!-- reserved for GridBoard detection --> <!-- ArUco grid board id range -->
+      <param name="ignored_markers"  value="0, 1, 2, 3, 4, 5, 6, 7" value-sep=", " />
+      <!-- special marker size -->
+      <param name="special_marker_size"  value="50-53:0.15" value-sep=", " />Z
+
+    </node>
+  <!-- 
+  <include file="$(find-pkg-share realsense2_camera)/launch/rs_launch.py">
+    <arg name="camera_name"  value="head_camera" />
+      <arg name="serial_no"  value="'110422250453'" />
+      <arg name="color_width"  value="1280" />
+      <arg name="color_height"  value="720" /> 
+      <arg name="color_fps"  value="30.0" /> 
+      <arg name="enable_depth"  value="false" />
+      <arg name="enable_infra1"  value="false" />
+      <arg name="enable_infra2"  value="false" />
+    </include>
+  -->
+
+</launch>
