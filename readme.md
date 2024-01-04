@@ -10,11 +10,19 @@
 
 # Quickstart
 
-If you have a realsense camera
+If you have a realsense camera, you can run the following launch file to start marker-based SLAM quickly. Make sure you have realsense-ros2 before quickstart.
 
 ```bash
-ros2 launch marker_slam marker_slam.launch.xml
+git clone https://github.com/IntelRealSense/realsense-ros.git
 ```
+
+```bash
+ros2 launch marker_slam marker_slam_realsense.launch.xml
+```
+
+Open Rviz2, you all see TFs and markers like this:
+
+![](readme_assets/2023-11-15-16-49-03-fiducial-ros2.png)
 
 ## Frames in launch parameters
 
@@ -42,7 +50,7 @@ There are a few frames in the SLAM launch parameters:
 
 Run `sh clean_map.sh` to clean map file. Landmarks will be initiated in next run.
 
-![](readme_assets/2023-11-15-16-49-03-fiducial-ros2.png)
+
 
 ## About camera frame
 

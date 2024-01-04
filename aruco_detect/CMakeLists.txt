@@ -34,24 +34,13 @@ set(TARGET1 aruco_detector)
 set(TARGET2 aruco_group_detector)
 
 add_executable(${TARGET1} src/aruco_detect.cpp)
-add_executable(${TARGET2} src/marker_group_detector.cpp)
 
 target_include_directories(${TARGET1} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-target_include_directories(${TARGET2} PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>)
-# Add dependent msgs to project
+
+  # Add dependent msgs to project
 ament_target_dependencies(${TARGET1} 
-                          rclcpp
-                          sensor_msgs
-                          fiducial_msgs
-                          tf2_ros
-                          image_transport
-                          cv_bridge 
-                          tf2_geometry_msgs)
-ament_target_dependencies(${TARGET2} 
                           rclcpp
                           sensor_msgs
                           fiducial_msgs
@@ -61,11 +50,8 @@ ament_target_dependencies(${TARGET2}
                           tf2_geometry_msgs)
 
 target_link_libraries(${TARGET1} ${OpenCV_LIBS})
-target_link_libraries(${TARGET2} ${OpenCV_LIBS})
 
 install(TARGETS ${TARGET1}
-DESTINATION lib/${PROJECT_NAME})
-install(TARGETS ${TARGET2}
 DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY launch
